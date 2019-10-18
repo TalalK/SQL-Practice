@@ -2,3 +2,186 @@ This is the script File for my 4th class at UCLA
 
 begin:
 
+Introducing the LIKE operator.
+
+No Class on 31st Oct 
+
+
+The '%' Wildcard operator:
+
+
+
+Select Vend_name,
+from vendors,
+where vend_name like 'Bear%';
+
+
+The _ does only one character as a wildcard
+
+select cust_state
+from customers
+where cust_state like 'I_';
+
+Same Example
+
+
+select cust_state
+from customers
+where cust_state like '_Z';
+
+__ Two underscores 
+
+Select *,
+From vendors,
+Where vend_id like 'F__N10'
+
+Fills in the blanks with any from the database with two spaces.
+
+
+Mixing things up.
+
+select cust_state
+from customers
+where cust_state like '_R%';
+
+The % takes anything even a . or a even NOTHING.
+The _ only takes one character it can be stacked to multiple underscores such as __ or _________ to filter, doesnt take nothing.
+
+
+
+What if my data has % and _
+Then put the wild card into square braccets 
+
+Escaping the %
+Select cust_name,
+From customers,
+where cust_name = '%[_]%'
+# If this comtains an underscore it will find all that have underscores in its name.
+
+Select cust_name,
+From customers,
+where cust_name = '[fk]%'
+# This matching strings starting with f or k
+
+Select cust_name,
+From customers,
+where cust_name = '^[fk]%'
+# This matching strings not starting with f or k
+
+
+
+select cust_name
+from customers
+where cust_name like '[a-z]%';
+# name check for any name
+
+
+Caluclated Feilds:
+
+
+Select  
+  prod_id + prod_name 
+from Products
+
+Select 
+  vend_name + vend_country
+ From vendors
+ 
+ 
+Introducing 
+TRIM():   Removes leading space and trailing space
+RTRIM():  Right trim
+LTRIM():  Left trim 
+Typically just use TRIM 
+
+Select 
+trim(vend_country) + trim(vend_name)
+From Vendors;
+
+A comma in the select clause as an indicator to add another extra column.
+EG
+
+Select * , < This adds a new column.
+
+Delimiter:
+
+A delimiter is a sequence of one or more characters for specifying the boundary between separate, 
+independent regions in plain text or other data streams. 
+An example of a delimiter is the comma character, which acts as a field delimiter in a sequence of comma-separated values.
+
+
+
+
+Delimiter Concatenation Example:
+
+Select 
+trim(vend_name) + ': '
++ trim(vend_city) +','
++ trim(isNULL(vend_state,'??')) +','
++ trim(vend_zip) +','
++ trim(vend_country')
+as 'Vendor Mailing List'
+From vendors;
+
+If you concatenate a string with Null then the entire row will be Null,
+EG zero times zero is zero.
+
+Introducing ISNULL() its means if null.
+
+
+Arithmatic Calculations 
+Select <col> +|-|%|*|/ <col>
+From <tbl>
+
+Example:
+
+Select Isnull(vend_state, '??')
+from vendors;
+
+Introducing:
+
+UPPER : Capitalizes all
+LOWER : Lowecases all
+Substring: Returns a substring
+Left: Returns the first N Chars of the text
+Right: Returns the last N Chars of the text
+
+Text Manipulation
+
+Select cust_name, 
+right(cust_name, 3)
+as 'right(3)'
+from Customers;
+
+Select cust_name, 
+substring(cust_name, 3, 6)
+as 'substring(3, 6)'
+from Customers;
+
+
+EXTRA Functions:
+SOUNDEX(): Returns similar sounding strings good for searching thing spelled differently.
+
+Aggregate Functions
+
+Select <function> (<column>0
+From <Table>
+
+AVG()
+MIN()
+MAX()
+SUM()
+COUNT()
+^ These are self explainatory
+These also ignore NULL values
+
+Creating a table
+
+create table data (number integer null );
+
+Select avg(number)
+from data;
+
+A way to count Nulls:
+Count( * ) It will count everything including Nulls
+
