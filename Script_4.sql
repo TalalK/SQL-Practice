@@ -25,3 +25,27 @@ select * from orders where cust_id = '1000000001'
 
 
 
+-- The ANSI JOIN
+ select *
+ from a
+ join b on a.c = b.c
+ 
+ 
+ Insert into vendors
+ (vend_id,
+  vend_name);
+ 
+ Values 
+ ('TOY1',
+  'Totally_Toys');
+  
+OR 
+
+insert into vendors 
+values  Values 
+ ('TOY1',
+  'Totally_Toys');
+
+ 
+ 
+
